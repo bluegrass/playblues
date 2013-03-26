@@ -1,0 +1,21 @@
+{% extends "::base.html.twig" %}
+
+{% block title "Hello " ~ name %}
+
+{% block body %}
+    <h1>Hello {{ name }}!</h1>
+           
+    
+    {#{{ breadcrumb_widget( breadcrumb ) }} #}
+    
+
+    <!--
+    {{ viewstate_link( 'Goodbye' ,  path('_demo_goodbye') ) }}    
+    <form action='{{ path('_demo_goodbye') }}' method='post'>
+        {{ viewstate_form_hidden( ) }}
+        <input type='submit' value='Enviar'>
+    </form>
+    
+    -->
+{% endblock %}
+    
