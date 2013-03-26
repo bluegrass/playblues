@@ -9,13 +9,8 @@ if (!function_exists('intl_get_error_code')) {
     require_once __DIR__.'/../vendor/symfony/symfony/src/Symfony/Component/Locale/Resources/stubs/functions.php';
 }
 
+
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
-$loader->registerNamespaces(array(
-    // ...
-    'Knp\Bundle' => __DIR__.'/../vendor/bundles',
-    'Knp\Menu'   => __DIR__.'/../vendor/KnpMenu/src',
-    // ...
-));
 
 return $loader;
