@@ -11,6 +11,8 @@ use Acme\DemoBundle\Form\ContactType;
 // these import the "@Route" and "@Template" annotations
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+
 
 class DemoController extends Controller
 {
@@ -28,33 +30,33 @@ class DemoController extends Controller
      * @Template()
      */
     public function helloAction($name)
-    {
+    {   
         /*
-        $locations = array();
+        $params = $this->get('router')->match('/demo/hello/colo');
+        print_r( $params );            
         
-        $locations[] = new \Bluegrass\Blues\Bundle\BluesBundle\Model\Web\Location\UrlBasedLocation('http://localhost/symfony-2.2/web/app_dev.php/demo/hello/World?p1=1&p2=2'); 
-        $locations[] = new \Bluegrass\Blues\Bundle\BluesBundle\Model\Web\Location\UrlBasedLocation('http://localhost/symfony-2.2/web/app_dev.php/demo/hello/World?p1=1&p2=2', array( 'p1'=>5 , "p3" => 3 ) ); 
-        $locations[] = new \Bluegrass\Blues\Bundle\BluesBundle\Model\Web\Location\UrlBasedLocation('http://localhost/symfony-2.2/web/app_dev.php/demo/hello/World' ); 
+        echo "<br>";
+        echo "<br>";
         
-        foreach( $locations as $location ){
-
-            echo "PATH : " . $location->getPath() . " <br> ";
-
-            echo "QUERYSTRING : ";  
-            print_r( $location->getParameters() );
-            echo " <br> ";
-            
-            echo "URL : " . $location->getUrl() . " <br> ";
-            
+        $sitemap = $this->get('acme.demo.sitemap.manager')->getSitemap();
+        
+        echo "SITEMAP<br>";
+        
+        $it = new \RecursiveIteratorIterator($sitemap->getIterator(), \RecursiveIteratorIterator::SELF_FIRST);
+        foreach ( $it as $node ) { 
+            echo $node->getLabel() . " - ";
         }
-           */     
-        /*
-        $this->addBreadcrumbItem("Hello", new \Bluegrass\Blues\Bundle\BluesBundle\Model\Web\Location\RouteBasedLocation( '_demo_hello', array('name' => 'colo') ) );
-        $this->addBreadcrumbItem("Goodbye", new \Bluegrass\Blues\Bundle\BluesBundle\Model\Web\Location\RouteBasedLocation( '_demo_goodbye' ) );
-           */             
-        //return array_merge( array('name' => $name, 'breadcrumb' => $this->getBreadcrumb()->createView()), $this->getDefaultViewParams() );       
+
+        echo "<br>";
+        */
         
-        return array_merge( array('name' => $name ), $this->getDefaultViewParams() );       
+        $currentMenuItem = $this->get('acme.demo.menu.manager')->getCurrentMenuItem( $this->getRequest() );
+        if ( $currentMenuItem ){
+            $currentMenuItem->setCurrent( true );
+        }        
+        $menu = $this->get('acme.demo.menu.manager')->getMenu();
+        
+        return array_merge( array( 'name' => $name, 'menu' => $menu ), $this->getDefaultViewParams() );       
     }
 
     /**
