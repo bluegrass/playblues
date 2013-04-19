@@ -1,19 +1,14 @@
 {% extends "::base.html.twig" %}
 
 {% block title "Hello " ~ name %}
+    
+{% block body %}    
 
-{% block body %}
     <h1>Hello {{ name }}!</h1>
+    
+    <div id="pronit_ui_mainmenu">
+        {{ bluegrass_blues_menu( menu ) }}
+    </div>            
 
-    {{ knp_menu_render('AcmeDemoBundle:Builder:mainMenu') }}
-    
-    <!--
-    {{ viewstate_link( 'Goodbye' ,  path('_demo_goodbye') ) }}    
-    <form action='{{ path('_demo_goodbye') }}' method='post'>
-        {{ viewstate_form_hidden( ) }}
-        <input type='submit' value='Enviar'>
-    </form>
-    
-    -->
 {% endblock %}
     

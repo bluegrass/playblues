@@ -13,11 +13,6 @@ class AcmeDemoExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
-        
-        /*
-        $reflClass = new \ReflectionClass('Blues\Bridge\Twig\Extension\FormExtension');
-        $container->getDefinition('twig.loader.filesystem')->addMethodCall('addPath', array(dirname(dirname($reflClass->getFileName())).'/Resources/views/Form'));
-        */
     }
 
     public function getAlias()
