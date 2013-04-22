@@ -22,6 +22,7 @@ class SitemapManager extends AbstractSitemapManager
         
         $m3 = $sitemap->getRoot()->addChild( new Node("VENTAS-1","Gestión de Ventas", null, false) );
         $m3->addChild( new Node("VENTAS-1-1","Facturar", new RouteBasedLocation("comprasXFRoute") ) );
+        
         return $sitemap;
     }    
 }
