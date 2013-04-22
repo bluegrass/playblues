@@ -12,6 +12,7 @@ class SitemapManager extends AbstractSitemapManager
 {
     protected function buildSitemap()
     {
+
         $sitemap = new Sitemap( "H-1", "Home" );
         
         $m1 = $sitemap->getRoot()->addChild( new Node("GDM-1", "Gestión de Datos Maestros", new RouteBasedLocation("comprasRoute") ) );
