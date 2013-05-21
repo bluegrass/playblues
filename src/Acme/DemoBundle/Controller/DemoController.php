@@ -8,16 +8,25 @@ use Bluegrass\Blues\Bundle\BluesBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Acme\DemoBundle\Form\ContactType;
 
+use Bluegrass\Blues\Component\Widgets\FilterableMenu\FilterableMenuWidget;
+use Bluegrass\Blues\Component\Widgets\FilterableMenu\Model\FilterableMenuWidgetModel;
+
 // these import the "@Route" and "@Template" annotations
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route as AnnotationRoute;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
 use Symfony\Component\HttpFoundation\Request;
 
+
+use Symfony\Component\Routing\RouteCollection;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class DemoController extends Controller
 {
     /**
-     * @Route("/", name="_demo")
+     * @AnnotationRoute("/", name="_demo")
      * @Template()
      */
     public function indexAction()
@@ -26,41 +35,35 @@ class DemoController extends Controller
     }
 
     /**
-     * @Route("/hello/{name}", name="_demo_hello")
+     * @AnnotationRoute("/hello/{name}", name="_demo_hello")
      * @Template()
      */
     public function helloAction($name)
     {   
-        /*
-        $params = $this->get('router')->match('/demo/hello/colo');
-        print_r( $params );            
+/*
+        $baseUrl = $this->get('router')->getContext()->getBaseUrl();
         
-        echo "<br>";
-        echo "<br>";
+        $url = 'http://localhost/playblues/web/app_dev.php/demo/hello/colo';
         
-        $sitemap = $this->get('acme.demo.sitemap.manager')->getSitemap();
+        $urlRelativa = substr($url,  strpos( $url, $baseUrl ) + strlen( $baseUrl ));
         
-        echo "SITEMAP<br>";
+        $params = $this->get('router')->match( $urlRelativa );        
+        print_r( $params );
+ */
+        //$this->forward('bluegrass.blues.filterable_menu.controller:filterAction', array());
         
-        $it = new \RecursiveIteratorIterator($sitemap->getIterator(), \RecursiveIteratorIterator::SELF_FIRST);
-        foreach ( $it as $node ) { 
-            echo $node->getLabel() . " - ";
-        }
-
-        echo "<br>";
-        */
-        
-        $currentMenuItem = $this->get('acme.demo.menu.manager')->getCurrentMenuItem( $this->getRequest() );
-        if ( $currentMenuItem ){
-            $currentMenuItem->setCurrent( true );
-        }        
         $menu = $this->get('acme.demo.menu.manager')->getMenu();
         
-        return array_merge( array( 'name' => $name, 'menu' => $menu ), $this->getDefaultViewParams() );       
+        $filterableMenuWidget = new FilterableMenuWidget( new FilterableMenuWidgetModel( $menu ) );        
+        
+        return array_merge( array( 
+                                                    'name' => $name, 
+                                                    'filterableMenuWidget' => $filterableMenuWidget->buildView(),
+                                            ), $this->getDefaultViewParams() );       
     }
 
     /**
-     * @Route("/goodbye", name="_demo_goodbye")
+     * @AnnotationRoute("/goodbye", name="_demo_goodbye")
      * @Template()
      */
     public function goodbyeAction()
@@ -69,7 +72,7 @@ class DemoController extends Controller
     }
     
     /**
-     * @Route("/contact", name="_demo_contact")
+     * @AnnotationRoute("/contact", name="_demo_contact")
      * @Template()
      */
     public function contactAction()

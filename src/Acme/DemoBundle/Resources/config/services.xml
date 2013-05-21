@@ -21,6 +21,11 @@
         <service id="acme.demo.menu.manager" class="Acme\DemoBundle\Menu\MenuManager">            
             <argument type="service" id="acme.demo.sitemap.manager" />
         </service>
-                
+
+        <service id="bluegrass.blues.filterable_menu.controller" class="Bluegrass\Blues\Bundle\WidgetBundle\Controller\FilterableMenuController">            
+            <argument type="service" id="service_container" />
+            <argument type="service" id="acme.demo.menu.manager" />
+        </service>
+                                
     </services>
 </container>
