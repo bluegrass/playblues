@@ -1,0 +1,19 @@
+.bluegrass_blues_filterablemenu input
+{
+    width: 197px;
+}
+
+.bluegrass_blues_filterablemenu .bluegrass_blues_menu
+{
+    padding: 0px;
+    margin: 0px;
+    width: 200px;
+}
+
+/* Redefino los items de menú de Kendo */
+.k-menu .k-link 
+{
+    font-size:12px;
+    text-decoration:none;
+    border:0px;
+}
