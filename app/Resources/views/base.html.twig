@@ -5,23 +5,31 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         
         {% block stylesheets %}
-        
+               
             <link rel="stylesheet" href="{{ asset('assetic/bluegrassbluesbundle_stylesheets.css') }}" type="text/css" />
+            
+            <link href="{{ asset('css/kendo.common.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('css/kendo.uniform.min.css') }}" rel="stylesheet" />
 
+            <link href="{{ asset('css/base.css') }}" rel="stylesheet" />            
+            
         {% endblock %}
         
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        
+        {{ bluegrass_blues_widget( filterableMenuWidget ) }}        	
+        
         {% block body %}{% endblock %}
             
         {% block javascripts %}
             
             <script type='text/javascript' src="{{ asset('js/jquery-1.8.0.min.js') }}"></script>
+            <script type='text/javascript' src="{{ asset('js/kendo.web.min.js') }}"></script>
             
             <script src="{{ asset('assetic/bluegrassbluesbundle_javascripts.js') }}" type="text/javascript"></script>
-            
-            {{ viewstate_render(viewState) }}
+            <script src="{{ asset('assetic/bluegrassblueswidgetbundle_javascripts.js') }}" type="text/javascript"></script>
             
         {% endblock %}
     </body>
