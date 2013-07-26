@@ -4,7 +4,7 @@ namespace Acme\DemoBundle\Sitemap;
 
 use Bluegrass\Blues\Component\Sitemap\Sitemap;
 use Bluegrass\Blues\Component\Sitemap\AbstractSitemapManager;
-use Bluegrass\Blues\Bundle\BluesBundle\Model\Web\Location\RouteBasedLocation;
+use Bluegrass\Blues\Component\Model\Web\Location\RouteBasedLocation;
 
 use Bluegrass\Blues\Component\Sitemap\Node;
 
